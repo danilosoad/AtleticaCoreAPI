@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AtleticaCore.Repository;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -11,12 +12,19 @@ namespace AtleticaCore.Controllers
     [ApiController]
     public class UsuariosController : Controller
     {
+        public IUserRepository _repo { get; }
+        public UsuariosController(IUserRepository repo)
+        {
+            _repo = repo;
+        }
+
         [HttpGet]
         public async Task<IActionResult> Get()
         {
             try
             {
-                return Ok();
+                var result = await _repo.GetAllUsersAsync();
+                return Ok(result);
             }
             catch (Exception)
             {

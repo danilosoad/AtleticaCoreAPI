@@ -1,4 +1,6 @@
 ﻿using AtleticaCore.Data;
+using AtleticaCore.Model;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,6 +34,13 @@ namespace AtleticaCore.Repository
         public async Task<bool> SaveChangesAsync()
         {
             return (await _context.SaveChangesAsync() > 0); 
+        }
+
+        public async Task<Usuario[]> GetAllUsersAsync()
+        {
+            var result = _context.Usuarios.OrderBy(x => x.ID);
+
+            return await result.ToArrayAsync();
         }
     }
 }

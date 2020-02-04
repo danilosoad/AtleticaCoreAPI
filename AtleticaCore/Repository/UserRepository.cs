@@ -42,5 +42,12 @@ namespace AtleticaCore.Repository
 
             return await result.ToArrayAsync();
         }
+
+        public async Task<Usuario> GetUserByIdAsync(int id)
+        {
+            var result = _context.Usuarios.AsNoTracking().Where(x =>x.ID == id);
+
+            return await result.FirstOrDefaultAsync();
+        }
     }
 }

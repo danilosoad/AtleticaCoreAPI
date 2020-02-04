@@ -14,5 +14,6 @@ namespace AtleticaCore.Repository
         Task<bool> SaveChangesAsync();
 
         Task<Usuario[]> GetAllUsersAsync();
+        Task<Usuario> GetUserByIdAsync(int id);
     }
 }

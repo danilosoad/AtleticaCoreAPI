@@ -32,6 +32,8 @@ namespace AtleticaCore
                options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
             );
             services.AddScoped<IUserRepository, UserRepository>();
+
+            services.AddCors();
             services.AddControllers();
         }
 
@@ -44,7 +46,7 @@ namespace AtleticaCore
             }
 
             //app.UseHttpsRedirection();
-
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseRouting();
 
             app.UseAuthorization();

@@ -21,8 +21,11 @@ namespace AtleticaCore.Data
         {
             builder.Entity<Usuario>().HasData(
             new List<Usuario>() { 
-                new Usuario() {ID = 1, NOME = "DANILO", EMAIL="danilo@gmail.com" } ,
-                new Usuario() { ID = 2, NOME = "BIBI", EMAIL = "bibi@gmail.com" }
+                new Usuario() { ID = 1, NOME = "DANILO", EMAIL="danilo@gmail.com" } ,
+                new Usuario() { ID = 2, NOME = "BIBI", EMAIL = "bibi@gmail.com" },
+                new Usuario() { ID = 3, NOME = "CARLOS", EMAIL = "bibi@gmail.com" },
+                new Usuario() { ID = 4, NOME = "JOELTON", EMAIL = "bibi@gmail.com" },
+                new Usuario() { ID = 5, NOME = "GIL BROTHER", EMAIL = "bibi@gmail.com" },
                 }
             );
         }

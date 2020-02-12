@@ -13,5 +13,7 @@ namespace AtleticaCore.Model
         public string CPF { get; set; }
         public string EMAIL { get; set; }
         public bool APROVADO { get; set; }
+        public string LOGIN { get; set; }
+        public string SENHA { get; set; }
     }
 }

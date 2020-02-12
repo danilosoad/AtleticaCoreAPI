@@ -1,5 +1,6 @@
 ﻿using AtleticaCore.Model;
 using AtleticaCore.Repository;
+using AtleticaCore.Util;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -52,6 +53,11 @@ namespace AtleticaCore.Controllers
         {
             try
             {
+                if (string.IsNullOrEmpty(model.SENHA))
+                    return BadRequest();
+
+                model.SENHA = new Hash().CryptByCore(model.SENHA);
+
                 _repo.Add(model);
 
                 if (await _repo.SaveChangesAsync())

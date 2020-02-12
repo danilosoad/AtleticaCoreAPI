@@ -56,12 +56,55 @@ namespace AtleticaCore.Migrations
                     b.Property<string>("EMAIL")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("LOGIN")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("NOME")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SENHA")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
 
                     b.ToTable("Usuarios");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            APROVADO = false,
+                            EMAIL = "danilo@gmail.com",
+                            NOME = "DANILO"
+                        },
+                        new
+                        {
+                            ID = 2,
+                            APROVADO = false,
+                            EMAIL = "bibi@gmail.com",
+                            NOME = "BIBI"
+                        },
+                        new
+                        {
+                            ID = 3,
+                            APROVADO = false,
+                            EMAIL = "bibi@gmail.com",
+                            NOME = "CARLOS"
+                        },
+                        new
+                        {
+                            ID = 4,
+                            APROVADO = false,
+                            EMAIL = "bibi@gmail.com",
+                            NOME = "JOELTON"
+                        },
+                        new
+                        {
+                            ID = 5,
+                            APROVADO = false,
+                            EMAIL = "bibi@gmail.com",
+                            NOME = "GIL BROTHER"
+                        });
                 });
 #pragma warning restore 612, 618
         }

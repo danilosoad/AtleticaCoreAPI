@@ -62,6 +62,9 @@ namespace AtleticaCore.Migrations
                     b.Property<string>("NOME")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("SALT")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("SENHA")
                         .HasColumnType("nvarchar(max)");
 

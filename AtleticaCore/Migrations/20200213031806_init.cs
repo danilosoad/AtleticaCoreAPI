@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace AtleticaCore.Migrations
 {
-    public partial class init1 : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -33,7 +33,8 @@ namespace AtleticaCore.Migrations
                     EMAIL = table.Column<string>(nullable: true),
                     APROVADO = table.Column<bool>(nullable: false),
                     LOGIN = table.Column<string>(nullable: true),
-                    SENHA = table.Column<string>(nullable: true)
+                    SENHA = table.Column<string>(nullable: true),
+                    SALT = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -42,14 +43,14 @@ namespace AtleticaCore.Migrations
 
             migrationBuilder.InsertData(
                 table: "Usuarios",
-                columns: new[] { "ID", "APROVADO", "CPF", "EMAIL", "LOGIN", "NOME", "SENHA" },
+                columns: new[] { "ID", "APROVADO", "CPF", "EMAIL", "LOGIN", "NOME", "SALT", "SENHA" },
                 values: new object[,]
                 {
-                    { 1, false, null, "danilo@gmail.com", null, "DANILO", null },
-                    { 2, false, null, "bibi@gmail.com", null, "BIBI", null },
-                    { 3, false, null, "bibi@gmail.com", null, "CARLOS", null },
-                    { 4, false, null, "bibi@gmail.com", null, "JOELTON", null },
-                    { 5, false, null, "bibi@gmail.com", null, "GIL BROTHER", null }
+                    { 1, false, null, "danilo@gmail.com", null, "DANILO", null, null },
+                    { 2, false, null, "bibi@gmail.com", null, "BIBI", null, null },
+                    { 3, false, null, "bibi@gmail.com", null, "CARLOS", null, null },
+                    { 4, false, null, "bibi@gmail.com", null, "JOELTON", null, null },
+                    { 5, false, null, "bibi@gmail.com", null, "GIL BROTHER", null, null }
                 });
         }
 

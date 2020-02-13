@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AtleticaCore.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200211151135_init1")]
-    partial class init1
+    [Migration("20200213031806_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -62,6 +62,9 @@ namespace AtleticaCore.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NOME")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SALT")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SENHA")

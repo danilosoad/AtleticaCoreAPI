@@ -10,18 +10,13 @@ namespace AtleticaCore.Util
 {
     public class Hash
     {
-        public string CryptByCore(string password)
+        public string CryptByCore(string password, string salt)
         {
-            byte[] salt = new byte[128 / 8];
 
-            using (var rng = RandomNumberGenerator.Create())
-            {
-                rng.GetBytes(salt);
-            }
 
             string hashedPassword = Convert.ToBase64String(KeyDerivation.Pbkdf2(
                 password : password,
-                salt: salt,
+                salt: Encoding.UTF8.GetBytes(salt),
                 prf: KeyDerivationPrf.HMACSHA1,
                 iterationCount: 10000,
                 numBytesRequested: 256/8
@@ -30,11 +25,24 @@ namespace AtleticaCore.Util
             return hashedPassword;
         }
 
-        public bool CheckHashedPassword(string currentPassword, string storedPassword)
+        public string SaltCreate()
         {
-            var encryptedPassword = CryptByCore(currentPassword);
+            byte[] salt = new byte[128 / 8];
 
+            using (var rng = RandomNumberGenerator.Create())
+            {
+                rng.GetBytes(salt);
+                return Convert.ToBase64String(salt);
+            }
+        }
+        
+        public bool ValidatePassword(string currentPassword, string salt, string storedPassword)
+        {
+            var encryptedPassword = CryptByCore(currentPassword,salt);
+            
             return encryptedPassword == storedPassword;
         }
+
+        
     }
 }

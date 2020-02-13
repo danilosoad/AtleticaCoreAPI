@@ -49,5 +49,12 @@ namespace AtleticaCore.Repository
 
             return await result.FirstOrDefaultAsync();
         }
+
+        public async Task<Usuario> GetUserByLogin(string login)
+        {
+            var result = _context.Usuarios.AsNoTracking().FirstOrDefaultAsync(x => x.LOGIN.Equals(login));
+
+            return await result;
+        }
     }
 }

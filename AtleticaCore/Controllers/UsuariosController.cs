@@ -14,10 +14,13 @@ namespace AtleticaCore.Controllers
     [ApiController]
     public class UsuariosController : Controller
     {
+        private readonly Hash _hash;
+
         public IUserRepository _repo { get; }
-        public UsuariosController(IUserRepository repo)
+        public UsuariosController(IUserRepository repo, Hash hash)
         {
             _repo = repo;
+            _hash = hash;
         }
 
         [HttpGet]
@@ -56,7 +59,9 @@ namespace AtleticaCore.Controllers
                 if (string.IsNullOrEmpty(model.SENHA))
                     return BadRequest();
 
-                model.SENHA = new Hash().CryptByCore(model.SENHA);
+                var salt = _hash.SaltCreate();
+                model.SENHA = _hash.CryptByCore(model.SENHA,salt);
+                model.SALT = salt;
 
                 _repo.Add(model);
 

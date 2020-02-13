@@ -15,5 +15,6 @@ namespace AtleticaCore.Repository
 
         Task<Usuario[]> GetAllUsersAsync();
         Task<Usuario> GetUserByIdAsync(int id);
+        Task<Usuario> GetUserByLogin(string login);
     }
 }

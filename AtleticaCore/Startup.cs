@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AtleticaCore.Data;
 using AtleticaCore.Repository;
+using AtleticaCore.Util;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -32,9 +33,10 @@ namespace AtleticaCore
                options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
             );
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<Hash>();
 
             services.AddCors();
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

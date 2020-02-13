@@ -15,5 +15,6 @@ namespace AtleticaCore.Model
         public bool APROVADO { get; set; }
         public string LOGIN { get; set; }
         public string SENHA { get; set; }
+        public string SALT { get; set; }
     }
 }

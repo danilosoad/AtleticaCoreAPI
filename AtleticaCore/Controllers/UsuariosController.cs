@@ -1,6 +1,7 @@
 ﻿using AtleticaCore.Model;
 using AtleticaCore.Repository;
 using AtleticaCore.Util;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -12,6 +13,7 @@ namespace AtleticaCore.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class UsuariosController : Controller
     {
         private readonly Hash _hash;

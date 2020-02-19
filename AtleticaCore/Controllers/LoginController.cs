@@ -1,4 +1,5 @@
-﻿using AtleticaCore.Repository;
+﻿using AtleticaCore.Model;
+using AtleticaCore.Repository;
 using AtleticaCore.Util;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -15,17 +16,19 @@ namespace AtleticaCore.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class LoginController : Controller
+    public class LoginController : ControllerBase
     {
         private readonly IUserRepository _repo;
         private readonly Hash _hash;
         private readonly IConfiguration _configuration;
+        private readonly TokenGenerator _token;
 
-        public LoginController(IUserRepository repo, Hash hash, IConfiguration configuration)
+        public LoginController(IUserRepository repo, Hash hash, IConfiguration configuration, TokenGenerator token)
         {
             _repo = repo;
             _hash = hash;
             _configuration = configuration;
+            _token = token;
         }
 
         [HttpPost]
@@ -41,29 +44,11 @@ namespace AtleticaCore.Controllers
                 
                 if (authenticated)
                 {
-                    //cria-se token aqui
-                    var claims = new[]
-                    {
-                        new Claim(ClaimTypes.Name, result.NOME),
-                        new Claim(ClaimTypes.NameIdentifier, result.ID.ToString())
-                    };
+                    var token = _token.GenerateToken(result);
 
-                    //recebe uma instancia da classe symmetric security key
-                    //armazenando a chave de criptografia usada na criação do token
-                    var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["SecurityKey"]));
-
-                    //recebe um objeto Sigin Credentials contendo a chave de criptografia e o algoritmo de segurança
-                    var creds = new SigningCredentials(key,SecurityAlgorithms.HmacSha256);
-
-                    var token = new JwtSecurityToken(
-                        issuer: "AtleticaCoreApi",
-                        audience: "AtleticaCoreSPA",
-                        claims: claims,
-                        expires: DateTime.Now.AddMinutes(30),
-                        signingCredentials: creds
-                    );
-
-                    return Ok(new { token = new JwtSecurityTokenHandler().WriteToken(token) });
+                    result.SENHA = "";
+                    result.SALT = "";
+                    return Ok(new { token = token, user = result  });
                 }
                 else
                 {
@@ -72,7 +57,7 @@ namespace AtleticaCore.Controllers
             }
             else
             {
-                return NotFound();
+                return NotFound("Invalid user or password..");
             }
         }
     }

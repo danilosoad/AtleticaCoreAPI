@@ -14,7 +14,7 @@ namespace AtleticaCore.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public class UsuariosController : Controller
+    public class UsuariosController : ControllerBase
     {
         private readonly Hash _hash;
 

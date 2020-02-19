@@ -37,6 +37,7 @@ namespace AtleticaCore
             );
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<Hash>();
+            services.AddScoped<TokenGenerator>();
 
             //Especifica o esquema usado para autenticação do tipo bearer e define configurações..
             services.AddAuthentication(x =>
@@ -49,12 +50,10 @@ namespace AtleticaCore
                     options.SaveToken = true;
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
-                        ValidateIssuer = true,
-                        ValidateAudience = true,
+                        ValidateIssuer = false,
+                        ValidateAudience = false,
                         ValidateLifetime = true,
                         ValidateIssuerSigningKey = true,
-                        ValidIssuer = "AtleticaCoreApi",
-                        ValidAudience = "AtleticaCoreSPA",
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["SecurityKey"]))
                     };
             });

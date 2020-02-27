@@ -29,7 +29,7 @@ namespace AtleticaCore.Util
                 { 
                     new Claim(ClaimTypes.Name,usuario.NOME.ToString()),
                 }),
-                Expires = DateTime.UtcNow.AddMinutes(30),
+                Expires = DateTime.UtcNow.AddMinutes(5),
                 SigningCredentials = new SigningCredentials(
                     new SymmetricSecurityKey(key),
                     SecurityAlgorithms.HmacSha256Signature

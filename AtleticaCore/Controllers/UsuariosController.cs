@@ -54,6 +54,7 @@ namespace AtleticaCore.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> Post(Usuario model)
         {
             try

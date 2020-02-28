@@ -1,4 +1,5 @@
-﻿using AtleticaCore.Model;
+﻿using AtleticaCore.Data.Maps;
+using AtleticaCore.Model;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -19,8 +20,10 @@ namespace AtleticaCore.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.ApplyConfiguration(new UsuarioMap());
+
             builder.Entity<Usuario>().HasData(
-            new List<Usuario>() { 
+            new List<Usuario>() {
                 new Usuario() { ID = 1, NOME = "DANILO", EMAIL="danilo@gmail.com" } ,
                 new Usuario() { ID = 2, NOME = "BIBI", EMAIL = "bibi@gmail.com" },
                 new Usuario() { ID = 3, NOME = "CARLOS", EMAIL = "bibi@gmail.com" },

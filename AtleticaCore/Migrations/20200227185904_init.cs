@@ -32,8 +32,8 @@ namespace AtleticaCore.Migrations
                     CPF = table.Column<string>(nullable: true),
                     EMAIL = table.Column<string>(nullable: true),
                     APROVADO = table.Column<bool>(nullable: false),
-                    LOGIN = table.Column<string>(nullable: true),
-                    SENHA = table.Column<string>(nullable: true),
+                    LOGIN = table.Column<string>(type: "varchar(15)", maxLength: 15, nullable: true),
+                    SENHA = table.Column<string>(type: "varchar(120)", maxLength: 120, nullable: true),
                     SALT = table.Column<string>(nullable: true)
                 },
                 constraints: table =>

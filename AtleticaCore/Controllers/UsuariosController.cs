@@ -73,7 +73,7 @@ namespace AtleticaCore.Controllers
                     return Created($"api/usuario/{model.ID}",model);
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }

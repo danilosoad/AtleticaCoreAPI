@@ -57,7 +57,8 @@ namespace AtleticaCore.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LOGIN")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(15)")
+                        .HasMaxLength(15);
 
                     b.Property<string>("NOME")
                         .HasColumnType("nvarchar(max)");
@@ -66,7 +67,8 @@ namespace AtleticaCore.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SENHA")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(120)")
+                        .HasMaxLength(120);
 
                     b.HasKey("ID");
 

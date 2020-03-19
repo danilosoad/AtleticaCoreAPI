@@ -17,6 +17,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.Swagger;
+using Swashbuckle.Swagger;
 
 namespace AtleticaCore
 {
@@ -38,6 +41,10 @@ namespace AtleticaCore
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<Hash>();
             services.AddScoped<TokenGenerator>();
+            services.AddResponseCompression();
+            services.AddSwaggerGen(x => {
+                x.SwaggerDoc("v1", new OpenApiInfo { Title = "Atletica Core API", Version = "v1" });
+            });
 
             //Especifica o esquema usado para autenticação do tipo bearer e define configurações..
             services.AddAuthentication(x =>
@@ -76,11 +83,17 @@ namespace AtleticaCore
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseRouting();
             
+            
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+            });
+            app.UseResponseCompression();
+            app.UseSwagger();
+            app.UseSwaggerUI(c => { 
+                c.SwaggerEndpoint("/swagger/v1/swagger.json","Atletica Core API v1"); 
             });
         }
     }
